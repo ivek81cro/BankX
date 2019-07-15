@@ -11,8 +11,10 @@ public:
 	char* getAccNo() { return accountNo; }
 	void createAccount();
 	void saveAccount();
+	void allPrint();
 };
 bool checkIfExists(const char* n);
 void newAccount();
+void allAccounts();
 
 #endif

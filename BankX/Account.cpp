@@ -26,6 +26,22 @@ bool checkIfExists(const char* n) {
 	f.close();
 	return false;
 }
+void allAccounts() {
+	std::ifstream f;
+	Account t;
+	f.open("records.bank", std::ios::binary);
+	while (!f.eof()) {
+		if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
+		{
+			t.allPrint();
+		}
+	}
+	f.close();
+}
+
+void Account::allPrint() { 
+	std::cout << accountNo << ' ' << oib << ' ' << balance << std::endl; 
+}
 
 void Account::saveAccount() {
 	std::ofstream f;
@@ -42,9 +58,10 @@ void newAccount() {
 	Account acc;
 	try {
 		acc.createAccount();
+		acc.saveAccount();
 	}
 	catch (X& x) {
 		x.errorx();
 	}
-	acc.saveAccount();
+	
 }

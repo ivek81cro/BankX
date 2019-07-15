@@ -11,6 +11,8 @@ int main() {
 	int c;
 	std::cout << "1. New account" << std::endl;
 	std::cout << "2. New person" << std::endl;
+	std::cout << "3. Print all accounts" << std::endl;
+	std::cout << "4. Exit" << std::endl;
 	std::cout << "\nSelection: ";
 	while (std::cin >> c) {
 		switch (c)
@@ -20,6 +22,12 @@ int main() {
 			break;
 		case 2:
 			newPerson();
+			break;
+		case 3:
+			allAccounts();
+			break;
+		case 4:
+			exit(0);
 			break;
 		default:
 			std::cout << "Select one of existing choice! ";
