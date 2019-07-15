@@ -10,7 +10,7 @@ public:
 
 class Xexists :public X {
 public:
-	void errorx() { std::cout << "That account number exists, pick a nother one."; }
+	void errorx() { std::cout << "\nThat account number exists, pick a nother one.\n"; }
 };
 
 #endif // !XCL_H

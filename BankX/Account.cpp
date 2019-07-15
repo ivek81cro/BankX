@@ -45,7 +45,6 @@ void newAccount() {
 	}
 	catch (X& x) {
 		x.errorx();
-		exit(-1);
 	}
 	acc.saveAccount();
 }
