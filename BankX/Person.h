@@ -7,7 +7,7 @@ class Person {
 public:
 	Person() {}
 	~Person() { std::cout << "Pers destr"; }
-	void createPerson(Person& pers);
+	void createPerson();
 };
 
 void newPerson();
