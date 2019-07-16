@@ -1,5 +1,6 @@
 #include"Account.h"
 #include"Xclass.h"
+#include"Person.h"
 
 void Account::createAccount() {
 	std::cout << "Enter account number: ";
@@ -9,6 +10,7 @@ void Account::createAccount() {
 	std::cout << "Enter OIB: ";
 	std::cin >> oib;
 	checkOib(oib) ? NULL : throw Xoib();
+	checkCust(oib) ? NULL : throw Xcust();
 	std::cout << "Enter balance: ";
 	std::cin >> balance;
 	status = true;
@@ -32,6 +34,7 @@ bool checkIfExists(const char* n) {
 	std::ifstream f;
 	Account t;
 	f.open("records.bank", std::ios::binary);
+	if (!f)	throw Xfile();
 	while (!f.eof()) {
 		if (f.read(reinterpret_cast<char*>(&t), sizeof(t)) )
 		{
@@ -41,18 +44,30 @@ bool checkIfExists(const char* n) {
 	f.close();
 	return false;
 }
-void allAccounts() {
+
+void allAccounts(char* c) {
 	std::ifstream f;
 	Account t;
 	f.open("records.bank", std::ios::binary);
+	if (!f)	throw Xfile();
 	std::cout << std::setw(18) << std::setfill(' ') << "Account number" <<
 		std::setw(10) << std::setfill(' ') << "OIB" <<
 		std::setw(23) << std::setfill(' ') << "\tBalance" << std::endl;
-	while (!f.eof()) {
-		if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
-		{
-			t.allPrint();
+	if (c == 0) {
+		while (!f.eof()) {
+			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
+				t.allPrint();
 		}
+	}
+	else {
+		Person p;
+		printName(c,p);
+		while (!f.eof()) {
+			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
+				if(!strcmp(c,t.getoib()))
+					t.allPrint();
+		}
+		std::cout << p << std::endl;
 	}
 	f.close();
 }
@@ -63,12 +78,17 @@ void Account::allPrint() {
 		(status ? " Open " : "Closed") << std::endl;
 }
 
+void searchByOIB() {
+	char c[12];
+	std::cout << "Enter OIB: ";
+	std::cin >> c; checkOib(c)? NULL:throw Xoib();
+	allAccounts(c);
+}
+
 void Account::saveAccount() {
 	std::ofstream f;
 	f.open("records.bank", std::ios::binary|std::ios::app);
-	if (!f) {
-		std::cout << "Could not open file."; return;
-	}
+	if (!f)	throw Xfile();
 	f.write(reinterpret_cast<char*>(this), sizeof(*this));
 	f.close();
 

@@ -1,5 +1,6 @@
 #include"Person.h"
 #include"Account.h"
+#include"Xclass.h"
 
 void Person::createPerson() {
 	std::cout << "Enter name: ";
@@ -9,9 +10,47 @@ void Person::createPerson() {
 	std::cout << "Enter OIB: ";
 	std::cin >> oib;
 	std::cout << std::endl;
+	savePerson(this);
+}
+void savePerson(Person* p) {
+	std::ofstream f;
+	f.open("person.bank", std::ios::binary | std::ios::app);
+	if (!f)	throw Xfile();
+	f.write(reinterpret_cast<char*>(p), sizeof(*p));
+	f.close();
+}
+void newPerson() {	
+	Person p; p.createPerson();
 }
 
-void newPerson() {
-	Person per;
-	per.createPerson();
+bool checkCust(const char* n) {
+	std::ifstream f;
+	Person t;
+	f.open("person.bank", std::ios::binary);
+	if (!f)	throw Xfile();
+	while (!f.eof()) {
+		if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
+		{
+			if (!strcmp(t.getOib() , n)) return true;
+		}
+	}
+	f.close();
+	return false;
 }
+
+Person& printName(const char* n, Person& t) {
+	std::ifstream f;
+	f.open("person.bank", std::ios::binary);
+	if (!f)	throw Xfile();
+	while (!f.eof()) {
+		if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
+		{
+			if (!strcmp(t.getOib(), n)) return t;
+		}
+	}
+	f.close();
+}
+std::ostream& operator<<(std::ostream& os, const Person& p) {
+	return os << p.name << ' ' << p.surname;
+}
+

@@ -15,11 +15,13 @@ public:
 	void createAccount();
 	void saveAccount();
 	void allPrint();
+	char* getoib() { return oib; }
 };
 bool checkIfExists(const char* n);
 void newAccount();
-void allAccounts();
+void allAccounts(char* c);
 bool checkOib(char* c);
 bool checkAcc(char* c);
+void searchByOIB();
 
 #endif

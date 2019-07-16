@@ -1,6 +1,7 @@
 #include"Menu.h"
 #include"Account.h"
 #include"Person.h"
+
 void clrscr(){
 	std::cout << "\033[2J\033[1;1H"; //clear screen, win linux
 }
@@ -25,7 +26,7 @@ void mainMenu() {
 			newPerson();
 			break;
 		case 3:
-			allAccounts();
+			;
 			break;
 		case 4:
 			exit(0);
@@ -46,7 +47,7 @@ void accountMenu() {
 	int c;
 	std::cout << "1. New account" << std::endl;
 	std::cout << "2. All accounts" << std::endl;
-	std::cout << "3. Search" << std::endl;
+	std::cout << "3. Search for accounts owned by OIB" << std::endl;
 	std::cout << "4. Back to main menu" << std::endl;
 	std::cout << "\nSelection: ";
 	while (std::cin >> c) {
@@ -56,10 +57,10 @@ void accountMenu() {
 			newAccount();
 			break;
 		case 2:
-			allAccounts();
+			allAccounts(0);
 			break;
 		case 3:
-			;
+			searchByOIB();
 			break;
 		case 4:
 			clrscr();
