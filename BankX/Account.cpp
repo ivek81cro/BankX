@@ -4,13 +4,28 @@
 void Account::createAccount() {
 	std::cout << "Enter account number: ";
 	std::cin >> accountNo;
+	checkAcc(accountNo)? NULL : throw XaccNo();;
 	if(checkIfExists(accountNo)) throw Xexists();
 	std::cout << "Enter OIB: ";
 	std::cin >> oib;
+	checkOib(oib) ? NULL : throw Xoib();
 	std::cout << "Enter balance: ";
 	std::cin >> balance;
 	status = true;
 	std::cout << std::endl;
+}
+
+bool checkAcc(char* c) {
+	int i = 0;
+	if(isalpha(c[0]) || isalpha(c[1]))
+		while (*c != '\0') { ++c; ++i; }
+	return i == 21;
+}
+
+bool checkOib(char* c) {
+	int i = 0;
+	while (*c != '\0') { ++c; ++i; }
+	return i == 11;
 }
 
 bool checkIfExists(const char* n) {

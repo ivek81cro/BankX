@@ -10,7 +10,7 @@ class Account {
 	double balance;
 public:
 	Account() {}
-	~Account() { std::cout << "Acc destr"; }
+	~Account() {}
 	char* getAccNo() { return accountNo; }
 	void createAccount();
 	void saveAccount();
@@ -19,5 +19,7 @@ public:
 bool checkIfExists(const char* n);
 void newAccount();
 void allAccounts();
+bool checkOib(char* c);
+bool checkAcc(char* c);
 
 #endif
