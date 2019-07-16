@@ -1,6 +1,9 @@
 #include"Menu.h"
 #include"Account.h"
 #include"Person.h"
+void clrscr(){
+	std::cout << "\033[2J\033[1;1H"; //clear screen, win linux
+}
 
 void mainMenu() {
 	std::cout << std::setw(40) << std::setfill('*') << "Account system"
@@ -36,7 +39,7 @@ void mainMenu() {
 }
 
 void accountMenu() {
-	system("cls");
+	clrscr();
 	std::cout << std::setw(40) << std::setfill('*') << "Account management"
 		<< std::setw(40) << std::setfill('*') << "" << std::endl;
 	std::cout << "Select your choice" << std::endl;
@@ -59,9 +62,8 @@ void accountMenu() {
 			;
 			break;
 		case 4:
-			system("cls");
+			clrscr();
 			mainMenu();
-			exit(0);
 			break;
 		default:
 			std::cout << "Select one of existing choice! ";
@@ -69,5 +71,4 @@ void accountMenu() {
 		}
 		std::cout << "\nSelection: ";
 	}
-	newAccount();
 }

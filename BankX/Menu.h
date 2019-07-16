@@ -3,5 +3,5 @@
 
 void accountMenu();
 void mainMenu();
-
+void clrscr();
 #endif // !MEN_H
