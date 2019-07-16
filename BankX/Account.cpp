@@ -1,7 +1,7 @@
 #include"Account.h"
 #include"Xclass.h"
 #include"Person.h"
-
+//enter data for new account
 void Account::createAccount() {
 	std::cout << "Enter account number: ";
 	std::cin >> accountNo;
@@ -16,20 +16,20 @@ void Account::createAccount() {
 	status = true;
 	std::cout << std::endl;
 }
-
-bool checkAcc(char* c) {
+//check if account number is consistent with format
+bool checkAcc(const char* c) {
 	int i = 0;
 	if(isalpha(c[0]) || isalpha(c[1]))
 		while (*c != '\0') { ++c; ++i; }
 	return i == 21;
 }
-
-bool checkOib(char* c) {
+//check if oib number is consistent with format
+bool checkOib(const char* c) {
 	int i = 0;
 	while (*c != '\0') { ++c; ++i; }
 	return i == 11;
 }
-
+//check if acc. number already exists
 bool checkIfExists(const char* n) {
 	std::ifstream f;
 	Account t;
@@ -44,8 +44,8 @@ bool checkIfExists(const char* n) {
 	f.close();
 	return false;
 }
-
-void allAccounts(char* c) {
+//print all accounts | print specific accounts
+void allAccounts(const char* c) {
 	std::ifstream f;
 	Account t;
 	f.open("records.bank", std::ios::binary);
@@ -71,20 +71,20 @@ void allAccounts(char* c) {
 	}
 	f.close();
 }
-
+//print format for accounts
 void Account::allPrint() {
 	std::cout << accountNo << '\t' << oib << '\t' << std::setw(15)
 		<< std::setprecision(2) << std::fixed << balance << "\t\tStatus:" <<
 		(status ? " Open " : "Closed") << std::endl;
 }
-
+//search for specific accounts
 void searchByOIB() {
 	char c[12];
 	std::cout << "Enter OIB: ";
 	std::cin >> c; checkOib(c)? NULL:throw Xoib();
 	allAccounts(c);
 }
-
+//save account
 void Account::saveAccount() {
 	std::ofstream f;
 	f.open("records.bank", std::ios::binary|std::ios::app);
@@ -93,7 +93,7 @@ void Account::saveAccount() {
 	f.close();
 
 }
-
+//open new account
 void newAccount() {
 	Account acc;
 	try {

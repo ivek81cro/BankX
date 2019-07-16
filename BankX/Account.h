@@ -19,9 +19,9 @@ public:
 };
 bool checkIfExists(const char* n);
 void newAccount();
-void allAccounts(char* c);
-bool checkOib(char* c);
-bool checkAcc(char* c);
+void allAccounts(const char* c);
+bool checkOib(const char* c);
+bool checkAcc(const char* c);
 void searchByOIB();
 
 #endif

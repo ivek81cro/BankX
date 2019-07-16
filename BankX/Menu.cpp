@@ -1,11 +1,11 @@
 #include"Menu.h"
 #include"Account.h"
 #include"Person.h"
-
+//clear screen function
 void clrscr(){
 	std::cout << "\033[2J\033[1;1H"; //clear screen, win linux
 }
-
+//Main menu
 void mainMenu() {
 	std::cout << std::setw(40) << std::setfill('*') << "Account system"
 		<< std::setw(40) << std::setfill('*') << "" << std::endl;
@@ -38,7 +38,7 @@ void mainMenu() {
 		std::cout << "\nSelection: ";
 	}
 }
-
+//account menu
 void accountMenu() {
 	clrscr();
 	std::cout << std::setw(40) << std::setfill('*') << "Account management"
