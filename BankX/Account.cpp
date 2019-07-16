@@ -1,6 +1,5 @@
 #include"Account.h"
 #include"Xclass.h"
-#include<fstream>
 
 void Account::createAccount() {
 	std::cout << "Enter account number: ";
@@ -10,6 +9,7 @@ void Account::createAccount() {
 	std::cin >> oib;
 	std::cout << "Enter balance: ";
 	std::cin >> balance;
+	status = true;
 	std::cout << std::endl;
 }
 
@@ -30,6 +30,9 @@ void allAccounts() {
 	std::ifstream f;
 	Account t;
 	f.open("records.bank", std::ios::binary);
+	std::cout << std::setw(18) << std::setfill(' ') << "Account number" <<
+		std::setw(10) << std::setfill(' ') << "OIB" <<
+		std::setw(23) << std::setfill(' ') << "\tBalance" << std::endl;
 	while (!f.eof()) {
 		if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
 		{
@@ -39,8 +42,10 @@ void allAccounts() {
 	f.close();
 }
 
-void Account::allPrint() { 
-	std::cout << accountNo << ' ' << oib << ' ' << balance << std::endl; 
+void Account::allPrint() {
+	std::cout << accountNo << '\t' << oib << '\t' << std::setw(15)
+		<< std::setprecision(2) << std::fixed << balance << "\t\tStatus:" <<
+		(status ? " Open " : "Closed") << std::endl;
 }
 
 void Account::saveAccount() {

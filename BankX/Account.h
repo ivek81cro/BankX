@@ -1,10 +1,13 @@
 #ifndef ACC_H
 #define ACC_H
 #include<iostream>
+#include<fstream>
+#include<iomanip>
 
 class Account {
-	char accountNo[19], oib[11];
-	float balance;
+	char accountNo[22], oib[12];
+	bool status;
+	double balance;
 public:
 	Account() {}
 	~Account() { std::cout << "Acc destr"; }
