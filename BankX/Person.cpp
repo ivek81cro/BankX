@@ -9,6 +9,7 @@ void Person::createPerson() {
 	std::cin >> surname;
 	std::cout << "Enter OIB: ";
 	std::cin >> oib;
+	checkOib(oib) ? NULL : throw Xoib();
 	std::cout << std::endl;
 	savePerson(this);
 }
