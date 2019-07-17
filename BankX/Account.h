@@ -16,6 +16,8 @@ public:
 	void saveAccount();
 	void allPrint();
 	char* getoib() { return oib; }
+	void addBalance(double n) { balance += n; };
+	friend std::ostream& operator<<(std::ostream& os, const Account& a);
 };
 class ManagerAcc {
 public:
@@ -26,6 +28,7 @@ public:
 	bool checkAcc(const char* c);
 	void searchByOIB();
 	void searchAcc();
+	Account returnAccount(const char* c);
 };
 
 #endif

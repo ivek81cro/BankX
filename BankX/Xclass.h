@@ -33,4 +33,9 @@ public:
 	void errorx() { std::cout << "\nThat customer doesn't exist, please enter customer data first.\n"; }
 };
 
+class XwrongAmm :public X {
+public:
+	void errorx() { std::cout << "\nDeposit can't be less than zero.\n"; }
+};
+
 #endif // !XCL_H

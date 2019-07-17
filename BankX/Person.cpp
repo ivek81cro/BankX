@@ -1,6 +1,7 @@
 #include"Person.h"
 #include"Account.h"
 #include"Xclass.h"
+
 //endter data for new customer
 void Person::createPerson() {
 	ManagerPers m;
@@ -15,6 +16,17 @@ void Person::createPerson() {
 	std::cout << std::endl;
 	m.savePerson(this);
 }
+
+//name print format->cout<< Person
+std::ostream& operator<<(std::ostream& os, const Person& p) {
+	return os << p.name << ' ' << p.surname;
+}
+
+//person print
+void Person::allPrint() {
+	std::cout << name << "\t\t" << surname << "\t\t" << oib << std::endl;
+}
+
 //save new customer
 void ManagerPers::savePerson(Person* p) {
 	std::ofstream f;
@@ -63,15 +75,14 @@ void ManagerPers::searchByOIB() {
 	a.checkOib(c) ? NULL : throw Xoib();
 	allPersons(c);
 }
-void Person::allPrint() {
-	std::cout << name << '\t' << surname << "\t\t" <<  oib << std::endl;
-}
+
+//print specific person (c) | (0) print all persons
 void ManagerPers::allPersons(const char* c) {
 	std::ifstream f;
 	Person t;
 	f.open("person.bank", std::ios::binary);
 	if (!f)	throw Xfile();
-	std::cout << "Name" << '\t' << "Surname" << "\t\t" << "OIB" << std::endl;
+	std::cout << "Name" << "\t\t" << "Surname" << "\t\t" << "OIB" << std::endl;
 	std::cout << std::string(50, '-') << std::endl;
 	if (c == 0) {
 		while (!f.eof()) {
@@ -91,10 +102,7 @@ void ManagerPers::allPersons(const char* c) {
 	}
 	f.close();
 }
-//name print format
-std::ostream& operator<<(std::ostream& os, const Person& p) {
-	return os << p.name << ' ' << p.surname;
-}
+//search for customer
 void ManagerPers::searchPerson() {
 	try {
 		ManagerPers::searchByOIB();

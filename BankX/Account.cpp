@@ -1,13 +1,14 @@
 #include"Account.h"
 #include"Xclass.h"
 #include"Person.h"
+
 //enter data for new account
 void Account::createAccount() {
 	ManagerPers p;
 	ManagerAcc m;
 	std::cout << "Enter account number: ";
 	std::cin >> accountNo;
-	m.checkAcc(accountNo)? NULL : throw XaccNo();;
+	m.checkAcc(accountNo)? NULL : throw XaccNo();
 	if(m.checkIfExists(accountNo)) throw Xexists();
 	std::cout << "Enter OIB: ";
 	std::cin >> oib;
@@ -18,6 +19,28 @@ void Account::createAccount() {
 	status = true;
 	std::cout << std::endl;
 }
+
+//print format for accounts
+void Account::allPrint() {
+	std::cout << accountNo << '\t' << oib << '\t' << std::setw(15)
+		<< std::setprecision(2) << std::fixed << balance << "\t\tStatus:" <<
+		(status ? " Open " : "Closed") << std::endl;
+}
+
+//save account
+void Account::saveAccount() {
+	std::ofstream f;
+	f.open("records.bank", std::ios::binary | std::ios::app);
+	if (!f)	throw Xfile();
+	f.write(reinterpret_cast<char*>(this), sizeof(*this));
+	f.close();
+
+}
+//print for acc.no.
+std::ostream& operator<<(std::ostream& os, const Account& a) {
+	return os << a.accountNo;
+}
+
 //check if account number is consistent with format
 bool ManagerAcc::checkAcc(const char* c) {
 	int i = 0;
@@ -55,6 +78,7 @@ void ManagerAcc::allAccounts(const char* c) {
 	std::cout << std::setw(18) << std::setfill(' ') << "Account number" <<
 		std::setw(10) << std::setfill(' ') << "OIB" <<
 		std::setw(23) << std::setfill(' ') << "\tBalance" << std::endl;
+	std::cout << std::string(80, '-') << std::endl;
 	if (c == 0) {
 		while (!f.eof()) {
 			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
@@ -70,16 +94,11 @@ void ManagerAcc::allAccounts(const char* c) {
 				if(!strcmp(c,t.getoib()))
 					t.allPrint();
 		}
-		std::cout << p << std::endl;
+		std::cout << "Owner: " << p << std::endl;
 	}
 	f.close();
 }
-//print format for accounts
-void Account::allPrint() {
-	std::cout << accountNo << '\t' << oib << '\t' << std::setw(15)
-		<< std::setprecision(2) << std::fixed << balance << "\t\tStatus:" <<
-		(status ? " Open " : "Closed") << std::endl;
-}
+
 //search for specific accounts
 void ManagerAcc::searchByOIB() {
 	char c[12];
@@ -88,15 +107,26 @@ void ManagerAcc::searchByOIB() {
 	checkOib(c)? NULL:throw Xoib();
 	allAccounts(c);
 }
-//save account
-void Account::saveAccount() {
-	std::ofstream f;
-	f.open("records.bank", std::ios::binary|std::ios::app);
-	if (!f)	throw Xfile();
-	f.write(reinterpret_cast<char*>(this), sizeof(*this));
+//returns account for balance update, deletes old record
+Account ManagerAcc::returnAccount(const char* c) {
+	std::fstream f("records.bank", std::ios::in | std::ios::binary);
+	std::fstream of("temp.bank", std::ios::out | std::ios::binary);
+	Account t,n;
+	while (!f.eof()) {
+		if (f.read(reinterpret_cast<char*>(&t), sizeof(t))) {
+			if (!strcmp(c, t.getAccNo())) {
+				n = t; continue;
+			}
+			of.write(reinterpret_cast<char*>(&t), sizeof(t));
+		}
+	}
 	f.close();
-
+	of.close();
+	remove("records.bank");
+	rename("temp.bank", "records.bank");
+	return n;
 }
+
 //open new account
 void ManagerAcc::newAccount() {
 	Account acc;
