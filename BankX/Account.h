@@ -23,5 +23,6 @@ void allAccounts(const char* c);
 bool checkOib(const char* c);
 bool checkAcc(const char* c);
 void searchByOIB();
+void search();
 
 #endif

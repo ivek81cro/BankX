@@ -44,7 +44,7 @@ bool checkIfExists(const char* n) {
 	f.close();
 	return false;
 }
-//print all accounts | print specific accounts
+//0 print all accounts |c print specific accounts
 void allAccounts(const char* c) {
 	std::ifstream f;
 	Account t;
@@ -81,7 +81,8 @@ void Account::allPrint() {
 void searchByOIB() {
 	char c[12];
 	std::cout << "Enter OIB: ";
-	std::cin >> c; checkOib(c)? NULL:throw Xoib();
+	std::cin >> c; 
+	checkOib(c)? NULL:throw Xoib();
 	allAccounts(c);
 }
 //save account
@@ -104,4 +105,14 @@ void newAccount() {
 		x.errorx();
 	}
 	
+}
+void search() {
+	Account acc;
+	try {
+		searchByOIB();
+	}
+	catch (X& x) {
+		x.errorx();
+	}
+
 }

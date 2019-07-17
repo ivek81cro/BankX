@@ -60,7 +60,7 @@ void accountMenu() {
 			allAccounts(0);
 			break;
 		case 3:
-			searchByOIB();
+			search();
 			break;
 		case 4:
 			clrscr();
