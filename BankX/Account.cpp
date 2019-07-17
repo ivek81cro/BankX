@@ -104,8 +104,8 @@ void newAccount() {
 	catch (X& x) {
 		x.errorx();
 	}
-	
 }
+//search for specific accounts
 void search() {
 	try {
 		searchByOIB();
