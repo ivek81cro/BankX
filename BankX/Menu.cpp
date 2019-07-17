@@ -2,11 +2,11 @@
 #include"Account.h"
 #include"Person.h"
 //clear screen function
-void clrscr(){
+void Menu::clrscr(){
 	std::cout << "\033[2J\033[1;1H"; //clear screen, win linux
 }
 //Main menu
-void mainMenu() {
+void Menu::mainMenu() {
 	std::cout << std::setw(40) << std::setfill('*') << "Account system"
 		<< std::setw(40) << std::setfill('*') << "" << std::endl;
 	std::cout << "Select your choice" << std::endl;
@@ -20,10 +20,10 @@ void mainMenu() {
 		switch (c)
 		{
 		case 1:
-			accountMenu();
+			Menu::accountMenu();
 			break;
 		case 2:
-			newPerson();
+			Menu::customerMenu();
 			break;
 		case 3:
 			;
@@ -39,8 +39,8 @@ void mainMenu() {
 	}
 }
 //account menu
-void accountMenu() {
-	clrscr();
+void Menu::accountMenu() {
+	Menu::clrscr();
 	std::cout << std::setw(40) << std::setfill('*') << "Account management"
 		<< std::setw(40) << std::setfill('*') << "" << std::endl;
 	std::cout << "Select your choice" << std::endl;
@@ -51,16 +51,53 @@ void accountMenu() {
 	std::cout << "4. Back to main menu" << std::endl;
 	std::cout << "\nSelection: ";
 	while (std::cin >> c) {
+		ManagerAcc m;
 		switch (c)
 		{
 		case 1:
-			newAccount();
+			m.newAccount();
 			break;
 		case 2:
-			allAccounts(0);
+			m.allAccounts(0);
 			break;
 		case 3:
-			search();
+			m.searchAcc();
+			break;
+		case 4:
+			clrscr();
+			mainMenu();
+			break;
+		default:
+			std::cout << "Select one of existing choice! ";
+			break;
+		}
+		std::cout << "\nSelection: ";
+	}
+}
+
+void Menu::customerMenu() {
+	Menu::clrscr();
+	std::cout << std::setw(40) << std::setfill('*') << "Account management"
+		<< std::setw(40) << std::setfill('*') << "" << std::endl;
+	std::cout << "Select your choice" << std::endl;
+	int c;
+	std::cout << "1. New customer" << std::endl;
+	std::cout << "2. " << std::endl;
+	std::cout << "3. Search for customer by OIB" << std::endl;
+	std::cout << "4. Back to main menu" << std::endl;
+	std::cout << "\nSelection: ";
+	while (std::cin >> c) {
+		ManagerPers p;
+		switch (c)
+		{
+		case 1:
+			p.newPerson();
+			break;
+		case 2:
+			;
+			break;
+		case 3:
+			p.searchPerson();
 			break;
 		case 4:
 			clrscr();

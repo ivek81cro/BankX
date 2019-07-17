@@ -3,34 +3,36 @@
 #include"Person.h"
 //enter data for new account
 void Account::createAccount() {
+	ManagerPers p;
+	ManagerAcc m;
 	std::cout << "Enter account number: ";
 	std::cin >> accountNo;
-	checkAcc(accountNo)? NULL : throw XaccNo();;
-	if(checkIfExists(accountNo)) throw Xexists();
+	m.checkAcc(accountNo)? NULL : throw XaccNo();;
+	if(m.checkIfExists(accountNo)) throw Xexists();
 	std::cout << "Enter OIB: ";
 	std::cin >> oib;
-	checkOib(oib) ? NULL : throw Xoib();
-	checkCust(oib) ? NULL : throw Xcust();
+	m.checkOib(oib) ? NULL : throw Xoib();
+	p.checkCust(oib) ? NULL : throw Xcust();
 	std::cout << "Enter balance: ";
 	std::cin >> balance;
 	status = true;
 	std::cout << std::endl;
 }
 //check if account number is consistent with format
-bool checkAcc(const char* c) {
+bool ManagerAcc::checkAcc(const char* c) {
 	int i = 0;
 	if(isalpha(c[0]) || isalpha(c[1]))
 		while (*c != '\0') { ++c; ++i; }
 	return i == 21;
 }
 //check if oib number is consistent with format
-bool checkOib(const char* c) {
+bool ManagerAcc::checkOib(const char* c) {
 	int i = 0;
 	while (*c != '\0') { ++c; ++i; }
 	return i == 11;
 }
 //check if acc. number already exists
-bool checkIfExists(const char* n) {
+bool ManagerAcc::checkIfExists(const char* n) {
 	std::ifstream f;
 	Account t;
 	f.open("records.bank", std::ios::binary);
@@ -45,7 +47,7 @@ bool checkIfExists(const char* n) {
 	return false;
 }
 //0 print all accounts |c print specific accounts
-void allAccounts(const char* c) {
+void ManagerAcc::allAccounts(const char* c) {
 	std::ifstream f;
 	Account t;
 	f.open("records.bank", std::ios::binary);
@@ -61,7 +63,8 @@ void allAccounts(const char* c) {
 	}
 	else {
 		Person p;
-		printName(c,p);
+		ManagerPers m;
+		m.printName(c,p);
 		while (!f.eof()) {
 			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
 				if(!strcmp(c,t.getoib()))
@@ -78,7 +81,7 @@ void Account::allPrint() {
 		(status ? " Open " : "Closed") << std::endl;
 }
 //search for specific accounts
-void searchByOIB() {
+void ManagerAcc::searchByOIB() {
 	char c[12];
 	std::cout << "Enter OIB: ";
 	std::cin >> c; 
@@ -95,7 +98,7 @@ void Account::saveAccount() {
 
 }
 //open new account
-void newAccount() {
+void ManagerAcc::newAccount() {
 	Account acc;
 	try {
 		acc.createAccount();
@@ -106,9 +109,9 @@ void newAccount() {
 	}
 }
 //search for specific accounts
-void search() {
+void ManagerAcc::searchAcc() {
 	try {
-		searchByOIB();
+		ManagerAcc::searchByOIB();
 	}
 	catch (X& x) {
 		x.errorx();

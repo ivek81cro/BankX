@@ -5,7 +5,7 @@
 #include"Menu.h"
 
 int main() {
-
-	mainMenu();
+	Menu m;
+	m.mainMenu();
 
 }

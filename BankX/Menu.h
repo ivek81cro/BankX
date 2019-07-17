@@ -1,7 +1,11 @@
 #ifndef MEN_H
 #define MEN_H
 
-void accountMenu();
-void mainMenu();
-void clrscr();
+class Menu {
+public:
+	void mainMenu();
+	void accountMenu();
+	void customerMenu();
+	void clrscr();
+};
 #endif // !MEN_H

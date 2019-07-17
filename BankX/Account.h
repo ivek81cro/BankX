@@ -17,12 +17,15 @@ public:
 	void allPrint();
 	char* getoib() { return oib; }
 };
-bool checkIfExists(const char* n);
-void newAccount();
-void allAccounts(const char* c);
-bool checkOib(const char* c);
-bool checkAcc(const char* c);
-void searchByOIB();
-void search();
+class ManagerAcc {
+public:
+	bool checkIfExists(const char* n);
+	void newAccount();
+	void allAccounts(const char* c);
+	bool checkOib(const char* c);
+	bool checkAcc(const char* c);
+	void searchByOIB();
+	void searchAcc();
+};
 
 #endif
