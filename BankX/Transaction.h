@@ -1,12 +1,11 @@
 #ifndef TRAN_H
 #define TRAN_H
-#pragma warning(disable : 4996)
 #include"Account.h"
 #include<chrono>
 
 struct date {
 	char time[20];// dd/mm/yyyy hh:mm:ss
-	date(const char* c) { strcpy(time, c); }
+	date(const char* c) { strcpy_s(time, c); }
 	date(){}
 	friend std::ostream& operator<<(std::ostream& os, const date& d) {
 		return os << d.time << ' ';
