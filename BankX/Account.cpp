@@ -107,7 +107,6 @@ void newAccount() {
 	
 }
 void search() {
-	Account acc;
 	try {
 		searchByOIB();
 	}
