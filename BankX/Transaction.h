@@ -1,6 +1,5 @@
-#ifndef TRAN_H
-#define TRAN_H
-#include"Account.h"
+#ifndef TR_H
+#define TR_H
 #include<chrono>
 #include<ctime>
 #include<string>
@@ -8,24 +7,17 @@
 #include<iomanip>
 
 class Transaction {
-	Account acc;
-	char type;
+protected:
+	char dateT[20];
 	double ammount;
-	char dat[20];	
 public:
-	Transaction(){}
-	Transaction(Account ac, double am, char t ):acc(ac),ammount(am), type(t){
+	Transaction(){
 		std::string s;
 		s = return_current_time_and_date();
-		strcpy(dat, s.c_str());
+		strcpy(dateT, s.c_str());
 	}
-	~Transaction(){}
-	void deposit();
-	void depositC();
-	void saveTrans();
-	void allTransact(const char* c);
-	friend std::ostream& operator<<(std::ostream& os, const Transaction& t);
+	~Transaction() {}
 	std::string return_current_time_and_date();
 };
 
-#endif // !TRAN_H
+#endif // !TR_H

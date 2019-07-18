@@ -27,6 +27,9 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Deposit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Transaction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Deposit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Transaction.h">

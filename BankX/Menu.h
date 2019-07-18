@@ -6,6 +6,7 @@ public:
 	void mainMenu();
 	void accountMenu();
 	void customerMenu();
+	void transferMenu();
 	void clrscr();
 };
 #endif // !MEN_H
