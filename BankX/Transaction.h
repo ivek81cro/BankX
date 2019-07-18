@@ -1,31 +1,23 @@
-#ifndef TRAN_H
-#define TRAN_H
-#include"Account.h"
+#ifndef TR_H
+#define TR_H
 #include<chrono>
-
-struct date {
-	char time[20];// dd/mm/yyyy hh:mm:ss
-	date(const char* c) { strcpy_s(time, c); }
-	date(){}
-	friend std::ostream& operator<<(std::ostream& os, const date& d) {
-		return os << d.time << ' ';
-	}
-};
+#include<ctime>
+#include<string>
+#include<sstream>
+#include<iomanip>
 
 class Transaction {
-	Account acc;
-	char type;
+protected:
+	char dateT[20];
 	double ammount;
-	date dat;	
 public:
-	Transaction(){}
-	Transaction(Account ac, double am, char t, date da ):acc(ac),ammount(am),dat(da), type(t){}
-	~Transaction(){}
-	void deposit();
-	void depositC();
-	void saveTrans();
-	void allTransact(const char* c);
-	friend std::ostream& operator<<(std::ostream& os, const Transaction& t);
+	Transaction(){
+		std::string s;
+		s = return_current_time_and_date();
+		strcpy(dateT, s.c_str());
+	}
+	~Transaction() {}
+	std::string return_current_time_and_date();
 };
 
-#endif // !TRAN_H
+#endif // !TR_H

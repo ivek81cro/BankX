@@ -4,7 +4,7 @@
 
 //enter data for new account
 void Account::createAccount() {
-	ManagerPers p;
+	Person p;
 	ManagerAcc m;
 	std::cout << "Enter account number: ";
 	std::cin >> accountNo;
@@ -87,8 +87,7 @@ void ManagerAcc::allAccounts(const char* c) {
 	}
 	else {
 		Person p;
-		ManagerPers m;
-		m.printName(c,p);
+		p.printName(c);
 		while (!f.eof()) {
 			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
 				if(!strcmp(c,t.getoib()))

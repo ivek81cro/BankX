@@ -12,6 +12,7 @@ public:
 	Account() {}
 	~Account() {}
 	char* getAccNo() { return accountNo; }
+	double getBalance() { return balance; }
 	void createAccount();
 	void saveAccount();
 	void allPrint();
