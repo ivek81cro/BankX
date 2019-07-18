@@ -2,30 +2,30 @@
 #define TRAN_H
 #include"Account.h"
 #include<chrono>
-
-struct date {
-	char time[20];// dd/mm/yyyy hh:mm:ss
-	date(const char* c) { strcpy_s(time, c); }
-	date(){}
-	friend std::ostream& operator<<(std::ostream& os, const date& d) {
-		return os << d.time << ' ';
-	}
-};
+#include<ctime>
+#include<string>
+#include<sstream>
+#include<iomanip>
 
 class Transaction {
 	Account acc;
 	char type;
 	double ammount;
-	date dat;	
+	char dat[20];	
 public:
 	Transaction(){}
-	Transaction(Account ac, double am, char t, date da ):acc(ac),ammount(am),dat(da), type(t){}
+	Transaction(Account ac, double am, char t ):acc(ac),ammount(am), type(t){
+		std::string s;
+		s = return_current_time_and_date();
+		strcpy(dat, s.c_str());
+	}
 	~Transaction(){}
 	void deposit();
 	void depositC();
 	void saveTrans();
 	void allTransact(const char* c);
 	friend std::ostream& operator<<(std::ostream& os, const Transaction& t);
+	std::string return_current_time_and_date();
 };
 
 #endif // !TRAN_H

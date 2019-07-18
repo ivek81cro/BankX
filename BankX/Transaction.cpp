@@ -25,14 +25,11 @@ void Transaction::depositC()
 	double amm;
 	std::cin >> amm;
 	amm < 0 ? throw XwrongAmm() : NULL;
-	std::cout << "Enter date: ";
-	char  d[21];
-	std::cin >> d;
-	date dt(d);
-	Transaction t(ac, amm, 'c', d);
+	Transaction t(ac, amm, 'c');
 	t.saveTrans();
 	ac.addBalance(amm);
 	ac.saveAccount();//append new balance to records
+	std::cout<<"Currnent balance: " << ac.getBalance();
 }
 //save record of transaction
 void Transaction::saveTrans() {
@@ -48,10 +45,8 @@ void Transaction::allTransact(const char* c) {
 	Transaction t;
 	f.open("transact.bank", std::ios::binary);
 	if (!f)	throw Xfile();
-	std::cout << "Date" <<
-		std::setw(23) << std::setfill(' ') << "To account" 
-		<< '\t' << '\t' << '\t' << "Type" << std::setw(23) << std::setfill(' ')
-		<< "\Ammount transfered" << std::endl;
+	std::cout << "Date\t\t\t" << "To account" 
+		<< '\t' << '\t' << '\t' << "Type" << "\tAmmount transfered" << std::endl;
 	std::cout << std::string(80, '-') << std::endl;
 	if (c == 0) {
 		while (!f.eof()) {
@@ -74,5 +69,15 @@ void Transaction::allTransact(const char* c) {
 }
 //print format for transaction records
 std::ostream& operator<<(std::ostream& os, const Transaction& t) {
-	return os << t.dat<< '\t' << t.acc << '\t' << '\t' << t.type << '\t' << t.ammount << std::endl;
+	return os << t.dat << '\t' << t.acc << '\t' << '\t' << t.type << '\t' << t.ammount << std::endl;
+}
+
+std::string Transaction::return_current_time_and_date()
+{
+	auto now = std::chrono::system_clock::now();
+	auto in_time_t = std::chrono::system_clock::to_time_t(now);
+
+	std::stringstream ss;
+	ss << std::put_time(std::localtime(&in_time_t), "%d/%m/%Y %X");
+	return ss.str();
 }
