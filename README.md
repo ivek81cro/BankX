@@ -1,7 +1,7 @@
 # BankX
-Bank records - programming practice<br>
-Trying to make simple bank records project running in c++, saving records in binary file.<br>
-As end result it should have next functionalities: <br>
+Bank records - programming in c++ practice<br>
+Trying to make simple bank records project running in c++, saving records in binary files.<br>
+As end result it should have following functionalities: <br>
 -input of new customers and accounts <br>
 -deposits<br>
 -withdrawals<br>
