@@ -1,7 +1,6 @@
 #ifndef PER_H
 #define PER_H
 #include<iostream>
-#include<string>
 
 class ManagerPers {
 public:

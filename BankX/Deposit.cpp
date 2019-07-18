@@ -1,9 +1,6 @@
-#include"Transaction.h"
 #include"Deposit.h"
 #include"Xclass.h"
-#include"Account.h"
 #include"Person.h"
-#include<iomanip>
 
 void Deposit::deposit() {
 	try {
@@ -68,13 +65,15 @@ void Deposit::allTransact(const char* c) {
 	}
 	else {
 		Person p;
+		
 		p.printName(c);
 		while (!f.eof()) {
 			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
 				if (!strcmp(c, t.acc.getoib()))
 					std::cout << t;
 		}
-		std::cout << "Owner: " << p << std::endl;
+		if(p.checkCust(c))
+			std::cout << "Owner: " << p << std::endl;
 	}
 	f.close();
 }
