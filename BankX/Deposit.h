@@ -4,7 +4,7 @@
 #include"Account.h"
 
 
-class Deposit : public Transaction, public ManagerAcc{
+class Deposit : public Transaction{
 	Account acc;
 	char type;	
 public:

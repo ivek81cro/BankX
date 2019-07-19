@@ -32,10 +32,11 @@ void Deposit::depositC()
 }
 
 void Deposit::specificTr() {
+	ManagerAcc m;
 	std::cout << "Enter OIB: ";
 	char c[12];
 	std::cin >> c;
-	ManagerAcc::checkOib(c) ?  NULL : throw Xoib();
+	m.checkOib(c) ?  NULL : throw Xoib();
 	allTransact(c);
 }
 //save record of Deposit
