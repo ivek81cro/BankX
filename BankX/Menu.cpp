@@ -148,7 +148,7 @@ void Menu::transferMenu() {
 			d.allTransact(0);
 			break;
 		case 5:
-			d.allTransact("12345678900");
+			d.specificTr();
 			break;
 		case 9:
 			clrscr();
