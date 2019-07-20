@@ -3,6 +3,7 @@
 #include"Person.h"
 #include"Transaction.h"
 #include"Deposit.h"
+#include"Tools.h"
 
 //clear screen function
 void Menu::clrscr(){
@@ -56,13 +57,14 @@ void Menu::accountMenu() {
 	std::cout << "\nSelection: ";
 	while (std::cin >> c) {
 		ManagerAcc m;
+		Toolbox v;
 		switch (c)
 		{
 		case 1:
 			m.newAccount();
 			break;
 		case 2:
-			m.allAccounts(0);
+			v.allAccounts(0);
 			break;
 		case 3:
 			m.searchAcc();
@@ -95,13 +97,14 @@ void Menu::customerMenu() {
 	std::cout << "\nSelection: ";
 	while (std::cin >> c) {
 		ManagerPers p;
+		Toolbox v;
 		switch (c)
 		{
 		case 1:
 			p.newPerson();
 			break;
 		case 2:
-			p.allPersons(0);
+			v.allPerson(0);
 			break;
 		case 3:
 			p.searchPerson();

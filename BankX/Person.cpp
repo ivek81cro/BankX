@@ -1,23 +1,24 @@
 #include"Person.h"
 #include"Account.h"
 #include"Xclass.h"
+#include"Tools.h"
 
 //endter data for new customer
 void Person::createPerson() {
-	ManagerAcc a;
+	Toolbox v;
 	std::cout << "Enter name: ";
 	std::cin >> name;
 	std::cout << "Enter surname: ";
 	std::cin >> surname;
 	std::cout << "Enter OIB: ";
 	std::cin >> oib;
-	a.checkOib(oib) ? NULL : throw Xoib();
+	v.checkElem(oib,"o") ? NULL : throw Xoib();
 	std::cout << std::endl;
 	savePerson();
 }
 
 //print name in account search
-Person& Person::printName(const char* n) {
+void Person::printName(const char* n) {
 	std::ifstream f;
 	f.open("person.bank", std::ios::binary);
 	if (!f)	throw Xfile();
@@ -48,56 +49,16 @@ void ManagerPers::savePerson() {
 void ManagerPers::newPerson() {
 	Person p; p.createPerson();
 }
-//check if customer exists in records
-bool Person::checkCust(const char* n) {
-	std::ifstream f;
-	f.open("person.bank", std::ios::binary);
-	if (!f)	throw Xfile();
-	while (!f.eof()) {
-		if (f.read(reinterpret_cast<char*>(this), sizeof(*this)))
-		{
-			if (!strcmp(getOib() , n)) return true;
-		}
-	}
-	f.close();
-	return false;
-}
 
 void ManagerPers::searchByOIB() {
-	ManagerAcc a;
+	Toolbox v;
 	char c[12];
 	std::cout << "Enter OIB: ";
 	std::cin >> c;
-	a.checkOib(c) ? NULL : throw Xoib();
-	allPersons(c);
+	v.checkElem(c,"o") ? NULL : throw Xoib();
+	v.allPerson(c);
 }
 
-//print specific person (c) | (0) print all persons
-void ManagerPers::allPersons(const char* c) {
-	std::ifstream f;
-	Person t;
-	f.open("person.bank", std::ios::binary);
-	if (!f)	throw Xfile();
-	std::cout << "Name" << "\t\t" << "Surname" << "\t\t" << "OIB" << std::endl;
-	std::cout << std::string(50, '-') << std::endl;
-	if (c == 0) {
-		while (!f.eof()) {
-			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
-				std::cout << t;
-		}
-	}
-	else {
-		Person p;
-		int flag = 1;
-		p.printName(c);
-		while (!f.eof()) {
-			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
-				if (!strcmp(c, t.getOib())) { std::cout << p; flag = 0; }
-		}
-		if (flag) { std::cout << "Nothing found"; }
-	}
-	f.close();
-}
 //search for customer
 void ManagerPers::searchPerson() {
 	try {

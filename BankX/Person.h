@@ -9,7 +9,6 @@ public:
 	void newPerson();
 	void savePerson();	
 	void searchPerson();
-	void allPersons(const char* c);
 	void searchByOIB();
 };
 
@@ -20,8 +19,7 @@ public:
 	~Person() {}
 	void createPerson();
 	char* getOib(){ return oib; }
-	Person& printName(const char* n);
-	bool checkCust(const char* n);
+	void printName(const char* n);
 	friend std::ostream& operator<<(std::ostream& os, const Person& p);
 };
 

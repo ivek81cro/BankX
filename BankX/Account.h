@@ -15,18 +15,14 @@ public:
 	double getBalance() { return balance; }
 	void createAccount();
 	void saveAccount();
-	void allPrint();
+	void allPerson();
 	char* getoib() { return oib; }
 	void addBalance(double n) { balance += n; };
 	friend std::ostream& operator<<(std::ostream& os, const Account& a);
 };
 class ManagerAcc {
 public:
-	bool checkIfExists(const char* n);
 	void newAccount();
-	void allAccounts(const char* c);
-	bool checkOib(const char* c);
-	bool checkAcc(const char* c);
 	void searchByOIB();
 	void searchAcc();
 	Account returnAccount(const char* c);

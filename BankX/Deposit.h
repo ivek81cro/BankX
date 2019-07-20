@@ -14,7 +14,7 @@ public:
 	void deposit();
 	void depositC();
 	void saveTrans();
-	void allTransact(const char* c);
+	void allTransact(char* c);
 	friend std::ostream& operator<<(std::ostream& os, const Deposit& t);
 	void specificTr();
 };

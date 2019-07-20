@@ -1,6 +1,7 @@
 #include"Deposit.h"
 #include"Xclass.h"
 #include"Person.h"
+#include"Tools.h"
 
 void Deposit::deposit() {
 	try {
@@ -11,14 +12,14 @@ void Deposit::deposit() {
 	}
 }
 //Deposit - cash
-void Deposit::depositC()
-{
+void Deposit::depositC(){
+	Toolbox v;
 	ManagerAcc rec;
 	char c[22];
 	std::cout << "Enter receiving account number: ";
 	std::cin >> c;
-	rec.checkAcc(c) ? NULL : throw XaccNo();
-	rec.checkIfExists(c);
+	v.checkElem(c,"a") ? NULL : throw XaccNo();
+	v.checkIfExists(c);
 	Account ac = rec.returnAccount(c);
 	std::cout << "Enter ammount you want to deposit: ";
 	double amm;
@@ -32,11 +33,11 @@ void Deposit::depositC()
 }
 
 void Deposit::specificTr() {
-	ManagerAcc m;
+	Toolbox v;
 	std::cout << "Enter OIB: ";
 	char c[12];
 	std::cin >> c;
-	m.checkOib(c) ?  NULL : throw Xoib();
+	v.checkElem(c,"o") ?  NULL : throw Xoib();
 	allTransact(c);
 }
 //save record of Deposit
@@ -48,7 +49,7 @@ void Deposit::saveTrans() {
 	f.close();
 }
 //print all (0) | (oib) specific oib Deposits
-void Deposit::allTransact(const char* c) {
+void Deposit::allTransact(char* c) {
 	std::ifstream f;
 	Deposit t;
 	f.open("deposit.bank", std::ios::binary);
@@ -66,14 +67,14 @@ void Deposit::allTransact(const char* c) {
 	}
 	else {
 		Person p;
-		
+		Toolbox v;
 		p.printName(c);
 		while (!f.eof()) {
 			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
 				if (!strcmp(c, t.acc.getoib()))
 					std::cout << t;
 		}
-		if(p.checkCust(c))
+		if(v.checkElem(c,"p"))
 			std::cout << "Owner: " << p << std::endl;
 	}
 	f.close();
