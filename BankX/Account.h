@@ -3,6 +3,7 @@
 #include<iostream>
 #include<fstream>
 #include<iomanip>
+#include<string>
 
 class Account {
 	char accountNo[22], oib[12];
@@ -13,6 +14,7 @@ public:
 	~Account() {}
 	char* getAccNo() { return accountNo; }
 	double getBalance() { return balance; }
+	bool isActive() { return status; }
 	void createAccount();
 	void saveAccount();
 	void allPerson();
@@ -25,7 +27,7 @@ public:
 	void newAccount();
 	void searchByOIB();
 	void searchAcc();
-	Account returnAccount(const char* c);
+	Account updateBalance(const char* c, const double amm);
 };
 
 #endif

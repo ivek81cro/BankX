@@ -15,7 +15,7 @@ public:
 
 class Xexists :public X {
 public:
-	void errorx() { std::cout << "\nThat account number exists, pick a nother one.\n"; }
+	void errorx() { std::cout << "\nThat account number doesn't exist/is closed, pick a nother one.\n"; }
 };
 
 class Xoib :public X {

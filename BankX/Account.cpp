@@ -51,23 +51,24 @@ void ManagerAcc::searchByOIB() {
 	v.allAccounts(c);
 }
 //returns account for balance update, deletes old record
-Account ManagerAcc::returnAccount(const char* c) {
-	std::fstream f("records.bank", std::ios::in | std::ios::binary);
-	std::fstream of("temp.bank", std::ios::out | std::ios::binary);
-	Account t,n;
+Account ManagerAcc::updateBalance(const char* c, const double amm) {
+	std::fstream f("records.bank", std::ios::in | std::ios::out | std::ios::binary);
+	Account t;
 	while (!f.eof()) {
 		if (f.read(reinterpret_cast<char*>(&t), sizeof(t))) {
 			if (!strcmp(c, t.getAccNo())) {
-				n = t; continue;
+				t.addBalance(amm);
+				int pos = (-1)*static_cast<int>(sizeof(t));
+				f.seekp(pos, std::ios::cur);
+				f.write(reinterpret_cast<char*>(&t), sizeof(t));
+				std::cout << "\n\n\t Record Updated";
+				std::cout << "Currnent balance: " << t.getBalance();
+				break;
 			}
-			of.write(reinterpret_cast<char*>(&t), sizeof(t));
 		}
 	}
 	f.close();
-	of.close();
-	remove("records.bank");
-	rename("temp.bank", "records.bank");
-	return n;
+	return t;
 }
 
 //open new account

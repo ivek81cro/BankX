@@ -19,17 +19,14 @@ void Deposit::depositC(){
 	std::cout << "Enter receiving account number: ";
 	std::cin >> c;
 	v.checkElem(c,"a") ? NULL : throw XaccNo();
-	v.checkIfExists(c);
-	Account ac = rec.returnAccount(c);
+	v.checkIfExists(c);	
 	std::cout << "Enter ammount you want to deposit: ";
 	double amm;
 	std::cin >> amm;
 	amm < 0 ? throw XwrongAmm() : NULL;
+	Account ac= rec.updateBalance(c,amm);
 	Deposit t(ac, 'c',amm);
 	t.saveTrans();
-	ac.addBalance(amm);
-	ac.saveAccount();//append new balance to records
-	std::cout<<"Currnent balance: " << ac.getBalance();
 }
 
 void Deposit::specificTr() {

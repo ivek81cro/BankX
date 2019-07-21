@@ -43,7 +43,7 @@ bool Toolbox::checkIfExists(char* n) {
 	while (!f.eof()) {
 		if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
 		{
-			if (!strcmp(t.getAccNo(), n)) return true;
+			if (!strcmp(t.getAccNo(), n) && t.isActive()) return true;
 		}
 	}
 	f.close();
