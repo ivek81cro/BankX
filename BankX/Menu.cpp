@@ -4,6 +4,7 @@
 #include"Transaction.h"
 #include"Deposit.h"
 #include"Tools.h"
+#include"Withdraw.h"
 
 //clear screen function
 void Menu::clrscr(){
@@ -16,7 +17,7 @@ void Menu::mainMenu() {
 	std::cout << "Select your choice" << std::endl;
 	int c;
 	std::cout << "1. Accounts" << std::endl;
-	std::cout << "2. Customers" << std::endl;
+	std::cout << "2. Clients" << std::endl;
 	std::cout << "3. Transfers" << std::endl;
 	std::cout << "9. Exit" << std::endl;
 	std::cout << "\nSelection: ";
@@ -90,9 +91,9 @@ void Menu::customerMenu() {
 		<< std::setw(40) << std::setfill('*') << "" << std::endl;
 	std::cout << "Select your choice" << std::endl;
 	int c;
-	std::cout << "1. New customer" << std::endl;
-	std::cout << "2. All customers" << std::endl;
-	std::cout << "3. Search for customer by OIB" << std::endl;
+	std::cout << "1. New client" << std::endl;
+	std::cout << "2. All clients" << std::endl;
+	std::cout << "3. Search for client by OIB" << std::endl;
 	std::cout << "9. Back to main menu" << std::endl;
 	std::cout << "\nSelection: ";
 	while (std::cin >> c) {
@@ -136,13 +137,14 @@ void Menu::transferMenu() {
 	std::cout << "\nSelection: ";
 	while (std::cin >> c) {
 		Deposit d;
+		Withdraw w;
 		switch (c)
 		{
 		case 1:
 			d.deposit();
 			break;
 		case 2:
-			;
+			w.withdraw();
 			break;
 		case 3:
 			;

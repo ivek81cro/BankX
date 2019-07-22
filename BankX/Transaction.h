@@ -18,6 +18,7 @@ public:
 	}
 	~Transaction() {}
 	std::string return_current_time_and_date();
+	void allTransact(char* c);
 };
 
 #endif // !TR_H

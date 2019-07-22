@@ -17,28 +17,13 @@ void Person::createPerson() {
 	savePerson();
 }
 
-//print name in account search
-void Person::printName(const char* n) {
-	std::ifstream f;
-	f.open("person.bank", std::ios::binary);
-	if (!f)	throw Xfile();
-	while (!f.eof()) {
-		if (f.read(reinterpret_cast<char*>(this), sizeof(*this)))
-		{
-			if (!strcmp(getOib(), n))
-				break;
-		}
-	}
-	f.close();
-}
-
 //name print format->cout<< Person
 std::ostream& operator<<(std::ostream& os, const Person& p) {
 	return os << p.name << "\t\t" << p.surname << "\t\t" << p.oib << std::endl;
 }
 
 //save new customer
-void ManagerPers::savePerson() {
+void Person::savePerson() {
 	std::ofstream f;
 	f.open("person.bank", std::ios::binary | std::ios::app);
 	if (!f)	throw Xfile();

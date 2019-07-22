@@ -66,7 +66,6 @@ void Toolbox::allPerson(const char* c) {
 	}
 	else {
 		int flag = 1;
-		t.printName(c);
 		while (!f.eof()) {
 			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
 				if (!strcmp(c, t.getOib())) { std::cout << t; flag = 0; }
@@ -93,7 +92,6 @@ void Toolbox::allAccounts(const char* c) {
 	}
 	else {
 		Person p;
-		p.printName(c);
 		while (!f.eof()) {
 			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
 				if (!strcmp(c, t.getoib()))

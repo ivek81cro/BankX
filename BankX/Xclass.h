@@ -38,4 +38,9 @@ public:
 	void errorx() { std::cout << "\nDeposit can't be less than zero.\n"; }
 };
 
+class XchBal :public X {
+public:
+	void errorx() { std::cout << "\nNot enough money.\n"; }
+};
+
 #endif // !XCL_H

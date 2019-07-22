@@ -7,7 +7,7 @@ public:
 	ManagerPers() {};
 	~ManagerPers() {};
 	void newPerson();
-	void savePerson();	
+		
 	void searchPerson();
 	void searchByOIB();
 };
@@ -18,8 +18,8 @@ public:
 	Person() {}
 	~Person() {}
 	void createPerson();
+	void savePerson();
 	char* getOib(){ return oib; }
-	void printName(const char* n);
 	friend std::ostream& operator<<(std::ostream& os, const Person& p);
 };
 

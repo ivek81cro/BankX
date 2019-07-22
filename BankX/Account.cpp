@@ -27,6 +27,11 @@ void Account::allPerson() {
 		(status ? " Open " : "Closed") << std::endl;
 }
 
+//print account number
+std::ostream& operator<<(std::ostream& os, const Account& ac) {
+	return os << ac.accountNo;
+}
+
 //save account
 void Account::saveAccount() {
 	std::ofstream f;
@@ -35,10 +40,6 @@ void Account::saveAccount() {
 	f.write(reinterpret_cast<char*>(this), sizeof(*this));
 	f.close();
 
-}
-//print for acc.no.
-std::ostream& operator<<(std::ostream& os, const Account& a) {
-	return os << a.accountNo;
 }
 
 //search for specific accounts
@@ -50,14 +51,14 @@ void ManagerAcc::searchByOIB() {
 	v.checkElem(c,"o")? NULL:throw Xoib();
 	v.allAccounts(c);
 }
-//returns account for balance update, deletes old record
-Account ManagerAcc::updateBalance(const char* c, const double amm) {
+//returns account for balance update
+Account ManagerAcc::updateBalance(const char* c, const double amm, const char d) {
 	std::fstream f("records.bank", std::ios::in | std::ios::out | std::ios::binary);
 	Account t;
 	while (!f.eof()) {
 		if (f.read(reinterpret_cast<char*>(&t), sizeof(t))) {
 			if (!strcmp(c, t.getAccNo())) {
-				t.addBalance(amm);
+				d == 'w' ? t.checkBalacne(amm) ? t.decrBalance(amm) : throw XchBal() : t.addBalance(amm);
 				int pos = (-1)*static_cast<int>(sizeof(t));
 				f.seekp(pos, std::ios::cur);
 				f.write(reinterpret_cast<char*>(&t), sizeof(t));

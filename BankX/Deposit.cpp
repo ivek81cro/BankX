@@ -18,15 +18,23 @@ void Deposit::depositC(){
 	char c[22];
 	std::cout << "Enter receiving account number: ";
 	std::cin >> c;
-	v.checkElem(c,"a") ? NULL : throw XaccNo();
+	v.checkElem(c, "a") ? NULL : throw XaccNo();
 	v.checkIfExists(c);	
 	std::cout << "Enter ammount you want to deposit: ";
 	double amm;
 	std::cin >> amm;
 	amm < 0 ? throw XwrongAmm() : NULL;
-	Account ac= rec.updateBalance(c,amm);
-	Deposit t(ac, 'c',amm);
+	Account ac = rec.updateBalance(c, amm, 'd');
+	Deposit t(ac, 'd',amm);
 	t.saveTrans();
+}
+
+void Deposit::saveTrans() {
+	std::ofstream f;
+	f.open("deposit.bank", std::ios::binary | std::ios::app);
+	if (!f)	throw Xfile();
+	f.write(reinterpret_cast<char*>(this), sizeof(*this));
+	f.close();
 }
 
 void Deposit::specificTr() {
@@ -37,50 +45,12 @@ void Deposit::specificTr() {
 	v.checkElem(c,"o") ?  NULL : throw Xoib();
 	allTransact(c);
 }
-//save record of Deposit
-void Deposit::saveTrans() {
-	std::ofstream f;
-	f.open("deposit.bank", std::ios::binary | std::ios::app);
-	if (!f)	throw Xfile();
-	f.write(reinterpret_cast<char*>(this), sizeof(*this));
-	f.close();
-}
-//print all (0) | (oib) specific oib Deposits
-void Deposit::allTransact(char* c) {
-	std::ifstream f;
-	Deposit t;
-	f.open("deposit.bank", std::ios::binary);
-	if (!f)	throw Xfile();
-	std::cout << std::setw(25) << std::left << std::setfill(' ') << "Date" <<
-		std::setw(30) << std::left << std::setfill(' ') << "To account" <<
-		std::setw(5) << std::left << std::setfill(' ') << "Type" <<
-		std::setw(25) << std::setfill(' ') << std::right << "Ammount transfered" << std::endl;
-	std::cout << std::string(100, '-') << std::endl;
-	if (c == 0) {
-		while (!f.eof()) {
-			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
-				std::cout << t;
-		}
-	}
-	else {
-		Person p;
-		Toolbox v;
-		p.printName(c);
-		while (!f.eof()) {
-			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
-				if (!strcmp(c, t.acc.getoib()))
-					std::cout << t;
-		}
-		if(v.checkElem(c,"p"))
-			std::cout << "Owner: " << p << std::endl;
-	}
-	f.close();
-}
-//print format for Deposit records
+
+//print format for Deposit records - used for withrawal allso
 std::ostream& operator<<(std::ostream& os, const Deposit& t) {
 	return os << std::setw(25) << std::left << std::setfill(' ') << t.dateT <<
 		std::setw(30) << std::left << std::setfill(' ') << t.acc <<
 		std::setw(5) << std::left << std::setfill(' ') << t.type <<
 		std::setw(25) << std::setfill(' ') << std::right << std::setprecision(2) <<
-		std::fixed << t.ammount << std::endl;
+		std::fixed << t.ammount;
 }

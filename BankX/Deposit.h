@@ -6,16 +6,16 @@
 
 class Deposit : public Transaction{
 	Account acc;
-	char type;	
+	char type;
 public:
 	Deposit(){}
-	Deposit(Account ac, char t, double am) :acc(ac), type(t) { ammount = am; }
+	Deposit(Account ac, char t, double am=0) :acc(ac), type(t) { ammount = am; }
 	~Deposit(){}
+	Account getAcc() { return acc; }
 	void deposit();
 	void depositC();
-	void saveTrans();
-	void allTransact(char* c);
 	friend std::ostream& operator<<(std::ostream& os, const Deposit& t);
+	void saveTrans();
 	void specificTr();
 };
 
