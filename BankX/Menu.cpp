@@ -5,6 +5,7 @@
 #include"Deposit.h"
 #include"Tools.h"
 #include"Withdraw.h"
+#include"Transfer.h"
 
 //clear screen function
 void Menu::clrscr(){
@@ -121,7 +122,7 @@ void Menu::customerMenu() {
 		std::cout << "\nSelection: ";
 	}
 }
-
+//transfer menu
 void Menu::transferMenu() {
 	Menu::clrscr();
 	std::cout << std::setw(40) << std::setfill('*') << "Transfer management"
@@ -147,7 +148,7 @@ void Menu::transferMenu() {
 			w.withdraw();
 			break;
 		case 3:
-			;
+			Transfer();
 			break;
 		case 4:
 			d.allTransact(0);

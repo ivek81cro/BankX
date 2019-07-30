@@ -28,6 +28,14 @@ void Withdraw::withdrawC() {
 	Withdraw w(ac, 'w', amm);
 	w.saveTrans();
 }
+//with existing data
+void Withdraw::withdrawC( const char* acNo , const double amm) {
+	ManagerAcc rec;
+	amm < 0 ? throw XwrongAmm() : NULL;
+	Account ac = rec.updateBalance(acNo, amm, 'w');
+	Withdraw w(ac, 'w', amm);
+	w.saveTrans();
+}
 
 void Withdraw::saveTrans() {
 	std::ofstream f;

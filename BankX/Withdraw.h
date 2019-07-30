@@ -10,9 +10,10 @@ class Withdraw : public Transaction {
 public:
 	Withdraw() {}
 	Withdraw(Account ac, char t, double am=0) :acc(ac), type(t) { ammount = am; }
-	~Withdraw() {}
 	void withdraw();
+	~Withdraw() {}
 	void withdrawC();
+	void withdrawC(const char* acNo, const double amm);
 	void saveTrans();
 	void specificTr();
 };
