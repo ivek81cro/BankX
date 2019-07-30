@@ -17,7 +17,6 @@ public:
 	void depositC(const char* acNo, const double amm);
 	friend std::ostream& operator<<(std::ostream& os, const Deposit& t);
 	void saveTrans();
-	void specificTr();
 };
 
 #endif // !DEP_H

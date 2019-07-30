@@ -45,15 +45,6 @@ void Deposit::saveTrans() {
 	f.close();
 }
 
-void Deposit::specificTr() {
-	Toolbox v;
-	std::cout << "Enter OIB: ";
-	char c[12];
-	std::cin >> c;
-	v.checkElem(c,"o") ?  NULL : throw Xoib();
-	allTransact(c);
-}
-
 //print format for Deposit records - used for withrawal allso
 std::ostream& operator<<(std::ostream& os, const Deposit& t) {
 	return os << std::setw(25) << std::left << std::setfill(' ') << t.dateT <<

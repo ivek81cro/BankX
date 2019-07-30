@@ -17,7 +17,7 @@ std::string Transaction::return_current_time_and_date(){
 }
 
 void Transaction::allTransact(char* c) {
-	std::ifstream f;
+	std::ifstream f, fp;
 	Deposit t;
 	f.open("deposit.bank", std::ios::binary);
 	if (!f)	throw Xfile();
@@ -33,15 +33,30 @@ void Transaction::allTransact(char* c) {
 		}
 	}
 	else {
-		Person p;
 		Toolbox v;
 		while (!f.eof()) {
 			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
 				if (!strcmp(c, t.getAcc().getoib()))
-					std::cout << t;
+					std::cout << t << std::endl;
 		}
-		if (v.checkElem(c, "p"))
-			std::cout << "Owner: " << p << std::endl;
+		fp.open("person.bank", std::ios::binary);
+		Person p;
+		while (!fp.eof()) {
+			if (fp.read(reinterpret_cast<char*>(&p), sizeof(p)));
+			if (!strcmp(p.getOib(), c)) break;
+		}
+		fp.close();
+		std::cout << "Account owner: ";
+		std::cout << p << std::endl;
 	}
 	f.close();
+}
+
+void Transaction::specificTr() {
+	Toolbox v;
+	std::cout << "Enter OIB: ";
+	char c[12];
+	std::cin >> c;
+	v.checkElem(c, "o") ? NULL : throw Xoib();
+	allTransact(c);
 }

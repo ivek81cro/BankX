@@ -139,6 +139,7 @@ void Menu::transferMenu() {
 	while (std::cin >> c) {
 		Deposit d;
 		Withdraw w;
+		Transaction t;
 		switch (c)
 		{
 		case 1:
@@ -154,7 +155,7 @@ void Menu::transferMenu() {
 			d.allTransact(0);
 			break;
 		case 5:
-			d.specificTr();
+			t.specificTr();
 			break;
 		case 9:
 			clrscr();
