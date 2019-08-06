@@ -13,7 +13,7 @@ void Account::createAccount() {
 	std::cout << "Enter OIB: ";
 	std::cin >> oib;
 	v.checkElem(oib,"o") ? NULL : throw Xoib();
-	v.checkElem(oib,"o") ? NULL : throw Xcust();
+	v.checkElem(oib,"p") ? NULL : throw Xcust();
 	std::cout << "Enter balance: ";
 	std::cin >> balance;
 	status = true;
