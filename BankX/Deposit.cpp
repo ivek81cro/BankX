@@ -29,7 +29,7 @@ void Deposit::depositC(){
 	t.saveTrans();
 }
 //existing data
-void Deposit::depositC(const char* acNo, const double amm) {
+void Deposit::depositC(const char* acNo, const double &amm) {
 	ManagerAcc rec;
 	amm < 0 ? throw XwrongAmm() : NULL;
 	Account ac = rec.updateBalance(acNo, amm, 'd');

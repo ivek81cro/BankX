@@ -13,7 +13,7 @@ public:
 	void withdraw();
 	~Withdraw() {}
 	void withdrawC();
-	void withdrawC(const char* acNo, const double amm);
+	void withdrawC(const char* acNo, const double &amm);
 	void saveTrans();
 	void specificTr();
 };

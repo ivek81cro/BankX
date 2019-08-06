@@ -52,7 +52,7 @@ void ManagerAcc::searchByOIB() {
 	v.allAccounts(c);
 }
 //returns account for balance update
-Account ManagerAcc::updateBalance(const char* c, const double amm, const char d) {
+Account ManagerAcc::updateBalance(const char* c, const double &amm, const char &d) {
 	std::fstream f("records.bank", std::ios::in | std::ios::out | std::ios::binary);
 	Account t;
 	while (!f.eof()) {

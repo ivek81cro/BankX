@@ -29,7 +29,7 @@ void Withdraw::withdrawC() {
 	w.saveTrans();
 }
 //with existing data
-void Withdraw::withdrawC( const char* acNo , const double amm) {
+void Withdraw::withdrawC( const char* acNo , const double &amm) {
 	ManagerAcc rec;
 	amm < 0 ? throw XwrongAmm() : NULL;
 	Account ac = rec.updateBalance(acNo, amm, 'w');

@@ -9,7 +9,6 @@ public:
 	bool checkIfExists(char* n);
 	void allPerson(const char* c);
 	void allAccounts(const char* c);
-	bool checkBalance(const Account ac, const double amm);
 };
 
 #endif // !CHK_H
