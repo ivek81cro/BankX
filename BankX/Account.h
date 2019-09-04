@@ -13,7 +13,6 @@ public:
 	Account() {}
 	~Account() {}
 	char* getAccNo() { return accountNo; }
-	bool checkBalacne(const double &amm) { return balance > amm; }
 	double getBalance() { return balance; }
 	bool isActive() { return status; }
 	void createAccount();

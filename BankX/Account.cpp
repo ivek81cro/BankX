@@ -58,7 +58,7 @@ Account ManagerAcc::updateBalance(const char* c, const double &amm, const char &
 	while (!f.eof()) {
 		if (f.read(reinterpret_cast<char*>(&t), sizeof(t))) {
 			if (!strcmp(c, t.getAccNo())) {
-				d == 'w' ? t.checkBalacne(amm) ? t.decrBalance(amm) : throw XchBal() : t.addBalance(amm);
+				d == 'w' ? (t.getBalance()<amm) ? t.decrBalance(amm) : throw XchBal() : t.addBalance(amm);
 				int pos = (-1)*static_cast<int>(sizeof(t));
 				f.seekp(pos, std::ios::cur);
 				f.write(reinterpret_cast<char*>(&t), sizeof(t));

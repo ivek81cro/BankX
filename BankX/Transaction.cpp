@@ -33,7 +33,6 @@ void Transaction::allTransact(char* c) {
 		}
 	}
 	else {
-		Toolbox v;
 		while (!f.eof()) {
 			if (f.read(reinterpret_cast<char*>(&t), sizeof(t)))
 				if (!strcmp(c, t.getAcc().getoib()))
